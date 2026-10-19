@@ -1,15 +1,16 @@
-import lerbrasil
-import funcoes_controle
+import lerbrasil as lerbrasil
+import funcoes_controle as funcoes_controle
 import time
 
 #Parâmetros:
 tamanho_população = 100
 tamanho_individuo = 58
 populacao = lerbrasil.inicializaPopulacao(tamanho_população, tamanho_individuo)
-operador_mutação = "inversao"#Operador de mutação pode ser "inversao", "insert" ou "swap"
+operador_mutação = "invert"#Operador de mutação pode ser "inversao", "insert" ou "swap"
 quantidade_mutacoes = 1
 chance_mutacao = 0.01
 chance_cruzamento = 0.8
+selecao_torneio = 3
 geracoes = 300
 
 inicio = time.perf_counter()
@@ -20,7 +21,8 @@ rota, aptidao = funcoes_controle.novaGeracao(
     operador_mutação, 
     quantidade_mutacoes, 
     chance_mutacao, 
-    chance_cruzamento, 
+    chance_cruzamento,
+    selecao_torneio, 
     geracoes
     )
 fim = time.perf_counter()

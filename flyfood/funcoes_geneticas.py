@@ -1,6 +1,7 @@
 from deap import base,tools
 import random
-def inversao(rota,quantidade,chance = 0.005):
+
+def invert(rota,quantidade,chance = 0.005):
     caminho = rota.copy()
     if random.random() < chance:
     
