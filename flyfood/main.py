@@ -3,11 +3,12 @@ import funcoes_controle as funcoes_controle
 import time
 
 #Parâmetros:
-lerflyfood.escolher_caso(1)  # Escolha o caso desejado (1, 2, 3, etc.)
-tamanho_população = 100
-tamanho_individuo = 9
-populacao = lerflyfood.inicializaPopulacao(tamanho_população, tamanho_individuo)
-operador_mutação = "insert"#Operador de mutação pode ser "inversao", "insert" ou "swap"
+caso = 3
+lerflyfood.escolhendo_caso(caso)  # Escolha o caso desejado (1, 2, 3, etc.)
+tamanho_populacao = 100
+tamanho_individuo = 8+caso
+populacao = lerflyfood.inicializaPopulacao(tamanho_populacao, tamanho_individuo)
+operador_mutacao = "insert"#Operador de mutação pode ser "invert", "insert" ou "swap"
 quantidade_mutacoes = 1
 chance_mutacao = 0.15
 chance_cruzamento = 0.8
@@ -18,8 +19,8 @@ inicio = time.perf_counter()
 rota, aptidao = funcoes_controle.novaGeracao(
     populacao, 
     lerflyfood.distancias, 
-    tamanho_população, 
-    operador_mutação, 
+    tamanho_populacao, 
+    operador_mutacao, 
     quantidade_mutacoes, 
     chance_mutacao, 
     chance_cruzamento,

@@ -1,8 +1,6 @@
 #from file import *
 import os
 
-caso_escolhido = 1
-escolhendo_caso = True
 caminho_arquivo = os.path.join(os.path.dirname(__file__), "edgesflyfood.tsp")
 
 objArq = open(caminho_arquivo)
@@ -11,36 +9,32 @@ objArq = open(caminho_arquivo)
 #listaLinhas = objArq.readlines() #obs: cada linha terah um enter junto com o ultimo elemento
 
 distancias = {}
-
-while escolhendo_caso:
+def escolhendo_caso(caso_escolhido = 1):
+	while True:
 	
-	linha = objArq.readline() #le só uma linha do arquivo
-	#transformando a linha em lista de strings:
-	 #obs: lista de strings (não int)
-	lista = linha.split()
-	if lista[0] == "CASO":
-		caso = int(lista[1])
-		if caso != caso_escolhido:
-			break
-		for i in range(1, 8+caso): #linhas 1 a 57 pois a 58 nao terá aresta
-			lista = objArq.readline().split() #le só uma linha do arquivo
-			if lista[0] == "FIM":
-				break
-			for j in range(i+1, 9+caso): #colunas i+1 a 58
-				if len(lista) > 0:
-					peso = int(lista.pop(0)) #obs: peso int, poderia ser float em outro problema
-				else:
-					print(f"Erro! linha {i} do arquivo não possui elementos suficientes")
-					exit()
+		linha = objArq.readline() #le só uma linha do arquivo
+		#transformando a linha em lista de strings:
+	 	#obs: lista de strings (não int)
+		lista = linha.split()
+		if lista == []:
+			continue
+		if lista[0] == "CASO":
+			caso = int(lista[1])
+			if caso != caso_escolhido:
+				continue
+			for i in range(1, 8+caso_escolhido): #linhas 1 a 57 pois a 58 nao terá aresta
+				lista = objArq.readline().split() #le só uma linha do arquivo
+				for j in range(i+1, 9+caso_escolhido): #colunas i+1 a 58
+					if len(lista) > 0:
+						peso = int(lista.pop(0)) #obs: peso int, poderia ser float em outro problema
+					else:
+						print(f"Erro! linha {i} do arquivo não possui elementos suficientes")
+						exit()
 				#gravando a aresta em (i, j) e (j, i):
-				distancias[(i,j)] = peso
-				distancias[(j,i)] = peso
-objArq.close()
-
-def escolher_caso(caso):
-	global caso_escolhido
-	if caso != caso_escolhido:
-		caso_escolhido = caso
+					distancias[(i,j)] = peso
+					distancias[(j,i)] = peso
+			break
+	objArq.close()
 
 #funcao que retorna o custo total do caminho:
 def custoCaminho(permutacao, dicDistancias):

@@ -6,12 +6,12 @@ import time
 tamanho_população = 100
 tamanho_individuo = 58
 populacao = lerbrasil.inicializaPopulacao(tamanho_população, tamanho_individuo)
-operador_mutação = "invert"#Operador de mutação pode ser "inversao", "insert" ou "swap"
+operador_mutação = "insert"#Operador de mutação pode ser "invert", "insert" ou "swap"
 quantidade_mutacoes = 1
-chance_mutacao = 0.01
+chance_mutacao = 0.15
 chance_cruzamento = 0.8
-selecao_torneio = 3
-geracoes = 300
+selecao_torneio = 10
+geracoes = 1000
 
 inicio = time.perf_counter()
 rota, aptidao = funcoes_controle.novaGeracao(
@@ -28,6 +28,6 @@ rota, aptidao = funcoes_controle.novaGeracao(
 fim = time.perf_counter()
 tempo = fim - inicio
 print(f"Tempo de execução: {tempo} segundos")
-print("Melhor rota encontrada:", rota)
+#print("Melhor rota encontrada:", rota)
 print("Aptidão:", aptidao)
 

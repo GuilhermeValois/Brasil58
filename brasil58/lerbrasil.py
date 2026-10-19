@@ -1,6 +1,8 @@
 #from file import *
+import os
 
-objArq = open("edgesbrasil58.tsp")
+caminho_arquivo = os.path.join(os.path.dirname(__file__), "edgesbrasil58.tsp")
+objArq = open(caminho_arquivo)
 #se você quiser uma lista onde cada objeto será uma string
 #grande representando uma linha do arquivo:
 #listaLinhas = objArq.readlines() #obs: cada linha terah um enter junto com o ultimo elemento
