@@ -22,9 +22,9 @@ def escolhendo_caso(caso_escolhido = 1):
 			caso = int(lista[1])
 			if caso != caso_escolhido:
 				continue
-			for i in range(1, 8+caso_escolhido): #linhas 1 a 57 pois a 58 nao terá aresta
+			for i in range(1, 9+caso_escolhido): #linhas 1 a 57 pois a 58 nao terá aresta
 				lista = objArq.readline().split() #le só uma linha do arquivo
-				for j in range(i+1, 9+caso_escolhido): #colunas i+1 a 58
+				for j in range(i+1, 10+caso_escolhido): #colunas i+1 a 58
 					if len(lista) > 0:
 						peso = int(lista.pop(0)) #obs: peso int, poderia ser float em outro problema
 					else:

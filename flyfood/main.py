@@ -3,10 +3,10 @@ import funcoes_controle as funcoes_controle
 import time
 
 #Parâmetros:
-caso = 3
+caso = 1
 lerflyfood.escolhendo_caso(caso)  # Escolha o caso desejado (1, 2, 3, etc.)
 tamanho_populacao = 100
-tamanho_individuo = 8+caso
+tamanho_individuo = 9+caso
 populacao = lerflyfood.inicializaPopulacao(tamanho_populacao, tamanho_individuo)
 operador_mutacao = "insert"#Operador de mutação pode ser "invert", "insert" ou "swap"
 quantidade_mutacoes = 1
