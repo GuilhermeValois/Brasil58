@@ -4,8 +4,12 @@ import funcoes_geneticas as funcoes_geneticas
 
 def menor(nova_populacao,aptidoes):
 
+    caminhos_equivalentes = []
     menor_indice = min(range(len(nova_populacao)), key = lambda i: aptidoes[i])
-    return nova_populacao[menor_indice], aptidoes[menor_indice]
+    for i in range(len(nova_populacao)):
+        if nova_populacao[i] == nova_populacao[menor_indice] and i != menor_indice:
+            caminhos_equivalentes.append(nova_populacao[i])
+    return nova_populacao[menor_indice], aptidoes[menor_indice], caminhos_equivalentes
 
 def selecaotorneio(populacao, aptidoes,k):
     candidatos = random.sample(range(len(populacao)),min(k,len(populacao)))
@@ -28,24 +32,9 @@ def novaGeracao(
 
         listaAptidao = lerbrasil.calculaAptidao(populacao, dicDistancias)
 
-        menor_individuo_global, menor_aptidao_global = menor(populacao, listaAptidao)
+        menor_individuo_global, menor_aptidao_global, caminhos_equivalentes = menor(populacao, listaAptidao)
 
-        pai1 = populacao[selecaotorneio(populacao, listaAptidao, selecao_torneio)]
-        pai2 = populacao[selecaotorneio(populacao, listaAptidao, selecao_torneio)]
-
-        filho1, filho2 =funcoes_geneticas.cruzamento(pai1, pai2, chanceCruzamento)
-
-        if operadorMutacao == "invert":
-            filho1 = funcoes_geneticas.invert(filho1, quantidadeMutacoes, chanceMutacao)
-            filho2 = funcoes_geneticas.invert(filho2, quantidadeMutacoes, chanceMutacao)
-        elif operadorMutacao == "insert":
-            filho1 = funcoes_geneticas.insert(filho1, quantidadeMutacoes, chanceMutacao)
-            filho2 = funcoes_geneticas.insert(filho2, quantidadeMutacoes, chanceMutacao)
-        else:
-            filho1 = funcoes_geneticas.swap(filho1, quantidadeMutacoes, chanceMutacao)
-            filho2 = funcoes_geneticas.swap(filho2, quantidadeMutacoes, chanceMutacao)
-
-        nova_populacao = [filho1, filho2]
+        nova_populacao = []
 
         while len(nova_populacao) < tamanhoPop:
             pai1 = populacao[selecaotorneio(populacao, listaAptidao,selecao_torneio)]
@@ -74,7 +63,7 @@ def novaGeracao(
         populacao = nova_populacao
         
     
-    return menor_individuo_global, menor_aptidao_global
+    return menor_individuo_global, menor_aptidao_global, caminhos_equivalentes
 
 
 def novaGeracaoporcento(
@@ -94,28 +83,9 @@ def novaGeracaoporcento(
 
         listaAptidao = lerbrasil.calculaAptidao(populacao, dicDistancias)
 
-        menor_individuo_global, menor_aptidao_global = menor(populacao, listaAptidao)
+        menor_individuo_global, menor_aptidao_global, caminhos_equivalentes = menor(populacao, listaAptidao)
 
-        pai1 = populacao[selecaotorneio(populacao, listaAptidao, selecao_torneio)]
-        pai2 = populacao[selecaotorneio(populacao, listaAptidao, selecao_torneio)]
-
-        filho1, filho2 =funcoes_geneticas.cruzamento(pai1, pai2, chanceCruzamento)
-        if random.random() > porcentagem:
-            operadorMutacao = operadorMutradom[1]
-        else:
-            operadorMutacao = operadorMutradom[0]
-
-        if  operadorMutacao == "invert":
-            filho1 = funcoes_geneticas.invert(filho1, quantidadeMutacoes, chanceMutacao)
-            filho2 = funcoes_geneticas.invert(filho2, quantidadeMutacoes, chanceMutacao)
-        elif operadorMutacao == "insert":
-            filho1 = funcoes_geneticas.insert(filho1, quantidadeMutacoes, chanceMutacao)
-            filho2 = funcoes_geneticas.insert(filho2, quantidadeMutacoes, chanceMutacao)
-        else:
-            filho1 = funcoes_geneticas.swap(filho1, quantidadeMutacoes, chanceMutacao)
-            filho2 = funcoes_geneticas.swap(filho2, quantidadeMutacoes, chanceMutacao)
-
-        nova_populacao = [filho1, filho2]
+        nova_populacao = []
 
         while len(nova_populacao) < tamanhoPop:
             pai1 = populacao[selecaotorneio(populacao, listaAptidao,selecao_torneio)]
@@ -149,4 +119,4 @@ def novaGeracaoporcento(
         populacao = nova_populacao
         
     
-    return menor_individuo_global, menor_aptidao_global
+    return menor_individuo_global, menor_aptidao_global, caminhos_equivalentes

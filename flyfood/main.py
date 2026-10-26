@@ -16,7 +16,7 @@ selecao_torneio = 3
 geracoes = 1000
 
 inicio = time.perf_counter()
-rota, aptidao = funcoes_controle.novaGeracao(
+rota, aptidao, caminhos_equivalentes = funcoes_controle.novaGeracao(
     populacao, 
     lerflyfood.distancias, 
     tamanho_populacao, 
@@ -32,4 +32,6 @@ tempo = fim - inicio
 print(f"Tempo de execução: {tempo} segundos")
 print("Melhor rota encontrada:", rota)
 print("Aptidão:", aptidao)
+#se não quiser os caminhos equivalentes comente a linha abaixo:
+print(caminhos_equivalentes)
 
