@@ -1,5 +1,6 @@
 from deap import base,tools
 import random
+import lerbrasil
 def invert(rota,quantidade,chance = 0.005):
     caminho = rota.copy()
     if random.random() < chance:
@@ -91,3 +92,23 @@ def cruzamento(pai1,pai2,chance = 0.8):
 
     else:
         return pai1.copy(), pai2.copy()
+
+def opt2(individuos,dictDistancias,tentativas = 50):
+    melhores_individuos = []
+    melhores_aptidoes = []
+
+    
+    for individuo in individuos:
+        individuo_atual = individuo.copy()
+        aptidao_atual = lerbrasil.calculaAptidao([individuo_atual],dictDistancias)[0]
+        for i in range(tentativas):
+            novo_individuo = invert(individuo_atual,1,1)
+            nova_aptidao = lerbrasil.calculaAptidao([novo_individuo],dictDistancias)[0]
+            if  nova_aptidao < aptidao_atual:
+                individuo_atual = novo_individuo
+                aptidao_atual = nova_aptidao
+            
+        melhores_individuos.append(individuo_atual)
+        melhores_aptidoes.append(aptidao_atual)
+    
+    return melhores_aptidoes, melhores_individuos
